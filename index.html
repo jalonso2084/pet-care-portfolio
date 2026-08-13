@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jorge Luis — Pet Care Portfolio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+:root{
+  --bg:#F1EEE3;
+  --surface:#FBF9F2;
+  --ink:#2E2B22;
+  --ink-soft:#5B5748;
+  --pine:#1F4A3D;
+  --pine-dark:#123128;
+  --marigold:#D9A441;
+  --clay:#B65A39;
+  --line:#DAD4C0;
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Work Sans',sans-serif;
+  line-height:1.55;
+}
+
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px;}
+
+/* ---------- HERO ---------- */
+header.hero{
+  padding:72px 0 40px;
+  border-bottom:1px solid var(--line);
+}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--pine);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:22px;
+}
+.eyebrow::before{
+  content:"";
+  width:8px;height:8px;border-radius:50%;
+  background:var(--marigold);
+  display:inline-block;
+}
+h1{
+  font-family:'Fraunces',serif;
+  font-weight:500;
+  font-size:clamp(34px,5vw,54px);
+  line-height:1.08;
+  letter-spacing:-.01em;
+  margin:0 0 20px;
+  max-width:16ch;
+}
+h1 em{
+  font-style:italic;
+  color:var(--pine);
+}
+.hero-sub{
+  font-size:17px;
+  color:var(--ink-soft);
+  max-width:52ch;
+  margin:0 0 40px;
+}
+
+.stat-strip{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.stamp{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:20px 18px;
+  position:relative;
+}
+.stamp::after{
+  content:"";
+  position:absolute;
+  top:14px;right:14px;
+  width:34px;height:34px;
+  border:1.5px dashed var(--pine);
+  border-radius:50%;
+  opacity:.5;
+}
+.stamp .num{
+  font-family:'Fraunces',serif;
+  font-size:32px;
+  font-weight:500;
+  color:var(--pine);
+  display:block;
+}
+.stamp .label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:var(--ink-soft);
+  display:block;
+  margin-top:4px;
+}
+
+/* ---------- FILTER TABS ---------- */
+.filters{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  padding:32px 0 8px;
+}
+.tab{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+  padding:9px 16px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:transparent;
+  color:var(--ink-soft);
+  cursor:pointer;
+  transition:all .15s ease;
+}
+.tab:hover{border-color:var(--pine);}
+.tab.active{
+  background:var(--pine);
+  border-color:var(--pine);
+  color:#F6F3E7;
+}
+
+/* ---------- CARD GRID ---------- */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+  padding:28px 0 60px;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:4px;
+  padding:26px 24px 22px;
+  position:relative;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.card:hover{
+  transform:translateY(-2px);
+}
+.card::before{
+  content:"";
+  position:absolute;
+  top:0;left:24px;right:24px;
+  height:0;
+  border-top:2px dotted var(--line);
+}
+.card-tag{
+  position:absolute;
+  top:-11px;left:24px;
+  background:var(--marigold);
+  color:#3B2A0C;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  padding:3px 9px;
+  border-radius:3px;
+  font-weight:500;
+}
+.quote{
+  font-family:'Fraunces',serif;
+  font-size:17px;
+  line-height:1.5;
+  margin:14px 0 20px;
+  color:var(--ink);
+}
+.card-foot{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  border-top:1px solid var(--line);
+  padding-top:14px;
+}
+.reviewer{
+  font-weight:600;
+  font-size:14px;
+}
+.meta{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+  color:var(--ink-soft);
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  margin-top:2px;
+}
+.verified-stamp{
+  width:52px;height:52px;
+  border:1.5px dashed var(--clay);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform:rotate(-10deg);
+  flex-shrink:0;
+}
+.verified-stamp span{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:8px;
+  letter-spacing:.04em;
+  color:var(--clay);
+  text-align:center;
+  text-transform:uppercase;
+  line-height:1.2;
+}
+
+/* ---------- FOOTER / CTA ---------- */
+footer{
+  background:var(--pine);
+  color:#F0EBD8;
+  padding:56px 0 48px;
+}
+footer .wrap{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:32px;
+  flex-wrap:wrap;
+}
+footer h2{
+  font-family:'Fraunces',serif;
+  font-weight:500;
+  font-size:26px;
+  margin:0 0 8px;
+}
+footer p{
+  color:#C8D6CD;
+  margin:0;
+  max-width:44ch;
+}
+.cta-btn{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  background:var(--marigold);
+  color:#3B2A0C;
+  border:none;
+  padding:15px 26px;
+  border-radius:4px;
+  cursor:pointer;
+  text-decoration:none;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.note{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  color:#8FA79A;
+  margin-top:28px;
+  border-top:1px solid #2D5A4B;
+  padding-top:20px;
+}
+
+@media(max-width:640px){
+  .stat-strip{grid-template-columns:1fr;}
+  footer .wrap{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">New Westminster, BC &middot; Pet care portfolio</div>
+    <h1>Jorge Luis has looked after homes and pets like yours&nbsp;— <em>and they'd tell you so themselves.</em></h1>
+    <p class="hero-sub">A selection of verified reviews and character references, gathered while sitting through TrustedHousesitters. Originals are retained and available on request.</p>
+    <div class="stat-strip">
+      <div class="stamp"><span class="num">13</span><span class="label">references shown here</span></div>
+      <div class="stamp"><span class="num">5.0</span><span class="label">average rating</span></div>
+      <div class="stamp"><span class="num">3+</span><span class="label">clients who booked again</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="filters" id="filters">
+    <button class="tab active" data-filter="all">All</button>
+    <button class="tab" data-filter="cats">Cats</button>
+    <button class="tab" data-filter="dogs">Dogs</button>
+    <button class="tab" data-filter="birds">Birds</button>
+    <button class="tab" data-filter="general">General care</button>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <div class="card" data-cat="cats">
+      <div class="card-tag">Verified &middot; 5/5</div>
+      <p class="quote">"Jorge was the absolute BEST house/pet sitter. Everything was in its place and perfect when I arrived home. The cats were content. The house was cleaner than when I left. The garden was thriving. He is terrific — reliable, conscientious, careful, kind and attentive."</p>
+      <div class="card-foot">
+        <div><div class="reviewer">Mary</div><div class="meta">TrustedHousesitters</div></div>
+        <div class="verified-stamp"><span>Verified<br>review</span></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="cats">
+      <div class="card-tag">Verified &middot; 5/5</div>
+      <p class="quote">"Jorge was very conscientious, and provided great care to our cats, including dealing with a combination of indoor/outdoor requirements, medications, and personalities. We have no hesitation in recommending Jorge as a trusted house sitter."</p>
+      <div class="card-foot">
+        <div><div class="reviewer">Pat and Dave</div><div class="meta">TrustedHousesitters</div></div>
+        <div class="verified-stamp"><span>Verified<br>review</span></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="cats">
+      <div class="card-tag">Verified &middot; 5/5</div>
+      <p class="quote">"Jorge did a very good job of caring for our cat and house. He was excellent at establishing communication, and even came out prior to his visit to meet us. He is a lovely man, reliable and very responsible."</p>
+      <div class="card-foot">
+        <div><div class="reviewer">Lara</div><div class="meta">TrustedHousesitters</div></div>
+        <div class="verified-stamp"><span>Verified<br>review</span></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="cats">
+      <div class="card-tag">Verified &middot; 5/5</div>
+      <p class="quote">"This is the third time Jorge has been our house and pet sitter. He consistently leaves the place very clean, and our cats know and trust him and are always relaxed and happy when we get home."</p>
+      <div class="card-foot">
+        <div><div class="reviewer">David and Kate</div><div class="meta">TrustedHousesitters &middot; repeat client</div></div>
+        <div class="verified-stamp"><span>Verified<br>review</span></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="cats">
+      <div class="card-tag">Verified &middot; 5/5</div>
+      <p class="quote">"It is always a pleasure to have Jorge look after our cats and home. He has done so many times and it is a comfort knowing he is with us. On our return home our cats are happy and so are we!"</p>
+      <div class="card-foot">
+        <div><div class="reviewer">Karen</div><div class="meta">TrustedHousesitters &middot; repeat client</div></div>
+        <div class="verified-stamp"><span>Verified<br>review</span></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="general">
+      <div class="card-tag">Verified &middot; 5/5</div>
+      <p class="quote">"We are happy to have connected with Jorge through Trusted Housesitters. He did a great job with our pets and we look forward to having him back."</p>
+      <div class="card-foot">
+        <div><div class="reviewer">Kathleen</div><div class="meta">TrustedHousesitters</div></div>
+        <div class="verified-stamp"><span>Verified<br>review</span></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="cats">
+      <div class="card-tag">Verified &middot; 5/5</div>
+      <p class="quote">"I highly recommend Jorge! He was a pleasure to work with and took excellent care of our two cats."</p>
+      <div class="card-foot">
+        <div><div class="reviewer">Lesley</div><div class="meta">TrustedHousesitters</div></div>
+        <div class="verified-stamp"><span>Verified<br>review</span></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="general">
+      <div class="card-tag">Verified &middot; 5/5</div>
+      <p class="quote">"Jorge was super easy to work with and sent us messages letting us know everything was going good."</p>
+      <div class="card-foot">
+        <div><div class="reviewer">Colleen</div><div class="meta">TrustedHousesitters</div></div>
+        <div class="verified-stamp"><span>Verified<br>review</span></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="cats">
+      <div class="card-tag">Verified &middot; 5/5</div>
+      <p class="quote">"We highly recommend Jorge to care for your home and pets. He took extraordinary care of our two cats and we are very grateful!"</p>
+      <div class="card-foot">
+        <div><div class="reviewer">Tanya</div><div class="meta">TrustedHousesitters</div></div>
+        <div class="verified-stamp"><span>Verified<br>review</span></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="general">
+      <div class="card-tag">Verified &middot; 5/5</div>
+      <p class="quote">"Jorge was a self sufficient and tidy sitter, and made sure my pets were cared for even when other obligations made it tricky. I would definitely have him take care of my pets again, and would recommend him to others."</p>
+      <div class="card-foot">
+        <div><div class="reviewer">Kelly</div><div class="meta">TrustedHousesitters &middot; repeat client</div></div>
+        <div class="verified-stamp"><span>Verified<br>review</span></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="dogs">
+      <div class="card-tag">Character ref &middot; 5/5</div>
+      <p class="quote">"Jorge has cared for our 2 golden doodles twice now — they were both happy and content upon our return. One had medical concerns that were well supported by Jorge, with excellent communication and good outcomes."</p>
+      <div class="card-foot">
+        <div><div class="reviewer">Annabel</div><div class="meta">TrustedHousesitters &middot; Dec 2023</div></div>
+        <div class="verified-stamp"><span>Verified<br>review</span></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="birds">
+      <div class="card-tag">Character ref &middot; 5/5</div>
+      <p class="quote">"We had never left our birds with anyone and were hesitant, as they come with a long list of daily todos. It was great coming home after more than a week and having the birds completely not stressed about us having been gone."</p>
+      <div class="card-foot">
+        <div><div class="reviewer">Bryan</div><div class="meta">TrustedHousesitters &middot; Apr 2022</div></div>
+        <div class="verified-stamp"><span>Verified<br>review</span></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="dogs">
+      <div class="card-tag">Character ref &middot; 5/5</div>
+      <p class="quote">"Jorge is always on time and spends extra quality time with Hunter. Our puppy was going through some issues with walking outside and Jorge was very patient with him. We feel at ease knowing Hunter is well-taken care of."</p>
+      <div class="card-foot">
+        <div><div class="reviewer">Nhi</div><div class="meta">TrustedHousesitters &middot; Oct 2021</div></div>
+        <div class="verified-stamp"><span>Verified<br>review</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;width:100%;">
+      <div>
+        <h2>Booking directly now</h2>
+        <p>Available for pet sitting, house sitting and dog walking in New Westminster and nearby. Reach out to check dates and rates.</p>
+      </div>
+      <a class="cta-btn" href="mailto:REPLACE-WITH-YOUR-EMAIL">Get in touch</a>
+    </div>
+    <p class="note">All quotes transcribed from TrustedHousesitters screenshots supplied by Jorge Luis. Originals retained and available to prospective clients on request.</p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('filters').addEventListener('click', function(e){
+  if(!e.target.classList.contains('tab')) return;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  e.target.classList.add('active');
+  var f = e.target.dataset.filter;
+  document.querySelectorAll('.card').forEach(function(card){
+    card.style.display = (f==='all' || card.dataset.cat===f) ? '' : 'none';
+  });
+});
+</script>
+
+</body>
+</html>
